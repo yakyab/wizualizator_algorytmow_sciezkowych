@@ -1,8 +1,9 @@
-#include <queue>
-#include <cmath>
+#include "AStar.h"
 #include "Grid.h"
 #include "Node.h"
 #include "CompareNode.h"
+#include <queue>
+#include <cmath>
 
 float heuristic(const Point& a, const Point& b) {
     return std::abs(a.x - b.x) + std::abs(a.y - b.y);
@@ -22,9 +23,11 @@ void AStar(Grid& grid, const Point& start, const Point& end) {
         Node* currentNode = openList.top();
         openList.pop();
 
-        if (*currentNode == endNode) {
-            return;
+        if (currentNode->position == end) {
+            return; // Znaleziono œcie¿kê
         }
+
+        currentNode->status = Node::Status::CLOSED;
 
         // Process neighbors
         std::vector<Point> directions = { {0,1}, {1,0}, {0,-1}, {-1,0} };
@@ -35,17 +38,20 @@ void AStar(Grid& grid, const Point& start, const Point& end) {
                 Node& neighbor = grid.getNode(newX, newY);
                 if (neighbor.status != Node::Status::OBSTACLE && neighbor.status != Node::Status::CLOSED) {
                     float newCost = currentNode->cost + 1; // Assuming equal cost for each step
-                    if (newCost < neighbor.cost) {
+                    if (newCost < neighbor.cost || neighbor.status == Node::Status::UNVISITED) {
                         neighbor.cost = newCost;
                         neighbor.heuristic = heuristic(neighbor.position, end);
                         neighbor.parent = currentNode;
                         openList.push(&neighbor);
+                        neighbor.status = Node::Status::OPEN;
                     }
                 }
             }
         }
-
-        currentNode->status = Node::Status::CLOSED;
     }
 }
+
+
+
+
 

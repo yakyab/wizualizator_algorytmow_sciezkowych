@@ -1,11 +1,13 @@
-#include <stack>
+#include "DFS.h"
 #include "Grid.h"
 #include "Node.h"
+#include <stack>
 
 void DFS(Grid& grid, const Point& start, const Point& end) {
     std::stack<Node*> stack;
 
     Node& startNode = grid.getNode(start.x, start.y);
+    startNode.status = Node::Status::OPEN;
     stack.push(&startNode);
 
     while (!stack.empty()) {
@@ -13,7 +15,7 @@ void DFS(Grid& grid, const Point& start, const Point& end) {
         stack.pop();
 
         if (currentNode->position == end) {
-            return;
+            return; // Zakoñcz algorytm, jeœli dotarliœmy do punktu koñcowego
         }
 
         // Process neighbors
@@ -24,11 +26,16 @@ void DFS(Grid& grid, const Point& start, const Point& end) {
             if (newX >= 0 && newX < grid.getWidth() && newY >= 0 && newY < grid.getHeight()) {
                 Node& neighbor = grid.getNode(newX, newY);
                 if (neighbor.status == Node::Status::UNVISITED) {
-                    neighbor.status = Node::Status::OPEN;
                     neighbor.parent = currentNode;
                     stack.push(&neighbor);
+                    neighbor.status = Node::Status::OPEN;
                 }
             }
         }
+
+        currentNode->status = Node::Status::CLOSED;
     }
 }
+
+
+

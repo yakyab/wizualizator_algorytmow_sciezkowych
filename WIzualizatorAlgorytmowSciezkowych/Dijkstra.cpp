@@ -1,23 +1,32 @@
-#include <queue>
+#include "Dijkstra.h"
 #include "Grid.h"
 #include "Node.h"
 #include "CompareNode.h"
-
+#include <queue>
 
 void Dijkstra(Grid& grid, const Point& start, const Point& end) {
     std::priority_queue<Node*, std::vector<Node*>, CompareNode> openList;
 
-
     Node& startNode = grid.getNode(start.x, start.y);
+    Node& endNode = grid.getNode(end.x, end.y);
+
     startNode.cost = 0;
+    startNode.status = Node::Status::OPEN;
     openList.push(&startNode);
 
     while (!openList.empty()) {
         Node* currentNode = openList.top();
         openList.pop();
 
-        if (currentNode->position == end) {
-            return;
+        currentNode->status = Node::Status::CLOSED;
+
+        if (currentNode->position == endNode.position) {
+            Node* pathNode = currentNode;
+            while (pathNode->parent) {
+                pathNode = pathNode->parent;
+                pathNode->status = Node::Status::PATH;
+            }
+            return; // Zakoñcz algorytm, jeœli dotarliœmy do punktu koñcowego
         }
 
         // Process neighbors
@@ -29,16 +38,21 @@ void Dijkstra(Grid& grid, const Point& start, const Point& end) {
                 Node& neighbor = grid.getNode(newX, newY);
                 if (neighbor.status != Node::Status::OBSTACLE && neighbor.status != Node::Status::CLOSED) {
                     float newCost = currentNode->cost + 1; // Assuming equal cost for each step
-                    if (newCost < neighbor.cost) {
+                    if (newCost < neighbor.cost || neighbor.status == Node::Status::UNVISITED) {
                         neighbor.cost = newCost;
                         neighbor.parent = currentNode;
-                        openList.push(&neighbor);
+                        if (neighbor.status != Node::Status::OPEN) {
+                            openList.push(&neighbor);
+                            neighbor.status = Node::Status::OPEN;
+                        }
                     }
                 }
             }
         }
-
-        currentNode->status = Node::Status::CLOSED;
     }
 }
+
+
+
+
 

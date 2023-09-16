@@ -1,11 +1,13 @@
-#include <queue>
+#include "BFS.h"
 #include "Grid.h"
 #include "Node.h"
+#include <queue>
 
 void BFS(Grid& grid, const Point& start, const Point& end) {
     std::queue<Node*> queue;
 
     Node& startNode = grid.getNode(start.x, start.y);
+    startNode.status = Node::Status::OPEN;
     queue.push(&startNode);
 
     while (!queue.empty()) {
@@ -13,7 +15,7 @@ void BFS(Grid& grid, const Point& start, const Point& end) {
         queue.pop();
 
         if (currentNode->position == end) {
-            return;
+            return; // Zakoñcz algorytm, jeœli dotarliœmy do punktu koñcowego
         }
 
         // Process neighbors
@@ -24,11 +26,16 @@ void BFS(Grid& grid, const Point& start, const Point& end) {
             if (newX >= 0 && newX < grid.getWidth() && newY >= 0 && newY < grid.getHeight()) {
                 Node& neighbor = grid.getNode(newX, newY);
                 if (neighbor.status == Node::Status::UNVISITED) {
-                    neighbor.status = Node::Status::OPEN;
                     neighbor.parent = currentNode;
                     queue.push(&neighbor);
+                    neighbor.status = Node::Status::OPEN;
                 }
             }
         }
+
+        currentNode->status = Node::Status::CLOSED;
     }
 }
+
+
+

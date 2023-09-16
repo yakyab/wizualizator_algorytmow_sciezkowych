@@ -146,13 +146,19 @@
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PathRetracer.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="WIzualizatorAlgorytmowSciezkowych.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AStar.h" />
+    <ClInclude Include="BFS.h" />
     <ClInclude Include="CompareNode.h" />
+    <ClInclude Include="DFS.h" />
+    <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PathRetracer.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

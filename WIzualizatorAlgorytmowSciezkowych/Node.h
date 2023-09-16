@@ -14,7 +14,8 @@ public:
         CLOSED,
         START,
         END,
-        OBSTACLE
+        OBSTACLE,
+        PATH // Dodaj ten status
     };
 
     Status status;
@@ -24,13 +25,9 @@ public:
 
     float getTotalCost() const { return cost + heuristic; }
     bool operator==(const Node& other) const { return position == other.position; }
-
-    struct CompareNode {
-        bool operator()(const Node* a, const Node* b) const {
-            return a->cost > b->cost;
-        }
-    };
 };
+
+
 
 
 

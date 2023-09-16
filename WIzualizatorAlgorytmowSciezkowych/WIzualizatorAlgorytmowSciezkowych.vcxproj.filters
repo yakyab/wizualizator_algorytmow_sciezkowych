@@ -48,6 +48,9 @@
     <ClCompile Include="CompareNode.cpp">
       <Filter>Struktury danych</Filter>
     </ClCompile>
+    <ClCompile Include="PathRetracer.cpp">
+      <Filter>Struktury danych</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -63,6 +66,21 @@
       <Filter>Struktury danych</Filter>
     </ClInclude>
     <ClInclude Include="CompareNode.h">
+      <Filter>Struktury danych</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.h">
+      <Filter>Algorytmy</Filter>
+    </ClInclude>
+    <ClInclude Include="Dijkstra.h">
+      <Filter>Algorytmy</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS.h">
+      <Filter>Algorytmy</Filter>
+    </ClInclude>
+    <ClInclude Include="DFS.h">
+      <Filter>Algorytmy</Filter>
+    </ClInclude>
+    <ClInclude Include="PathRetracer.h">
       <Filter>Struktury danych</Filter>
     </ClInclude>
   </ItemGroup>
