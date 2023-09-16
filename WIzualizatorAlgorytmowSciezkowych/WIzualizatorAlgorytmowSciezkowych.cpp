@@ -6,6 +6,7 @@
 #include "PathRetracer.h"
 #include <iostream>
 
+// Funkcja wyświetlająca menu wyboru algorytmu dla użytkownika
 void displayMenu() {
     std::cout << "Wybierz algorytm:\n";
     std::cout << "1. A*\n";
@@ -15,6 +16,7 @@ void displayMenu() {
     std::cout << "5. Wyjscie\n";
 }
 
+// Funkcja pobierająca od użytkownika punkt na siatce i sprawdzająca jego poprawność
 Point getUserPoint(const std::string& prompt, const Grid& grid) {
     Point p;
     while (true) {
@@ -32,6 +34,7 @@ Point getUserPoint(const std::string& prompt, const Grid& grid) {
     }
 }
 
+// Funkcja pozwalająca użytkownikowi ustawić przeszkody na siatce
 void setObstacles(Grid& grid) {
     int numObstacles;
     std::cout << "Ile przeszkod chcesz dodac? ";
@@ -43,6 +46,8 @@ void setObstacles(Grid& grid) {
     }
 }
 
+
+// Funkcja wyświetlająca siatkę w konsoli
 void displayGrid(const Grid& grid, const Point& start, const Point& end) {
     for (int y = 0; y < grid.getHeight(); ++y) {
         for (int x = 0; x < grid.getWidth(); ++x) {
@@ -58,8 +63,9 @@ void displayGrid(const Grid& grid, const Point& start, const Point& end) {
     }
 }
 
+// Główna funkcja programu
 int main() {
-    Grid grid(20, 20); // Przykładowa siatka 20x20
+    Grid grid(20, 20); // Inicjalizacja siatki o rozmiarze 20x20
     int choice;
 
     while (true) {

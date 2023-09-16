@@ -3,6 +3,7 @@
 #include "Node.h"
 #include <queue>
 
+// Implementacja algorytmu BFS do przeszukiwania siatki
 void BFS(Grid& grid, const Point& start, const Point& end) {
     std::queue<Node*> queue;
 
@@ -10,15 +11,17 @@ void BFS(Grid& grid, const Point& start, const Point& end) {
     startNode.status = Node::Status::OPEN;
     queue.push(&startNode);
 
+    // G³ówna pêtla algorytmu
     while (!queue.empty()) {
         Node* currentNode = queue.front();
         queue.pop();
 
+        // Jeœli dotarliœmy do wêz³a koñcowego, zakoñcz algorytm
         if (currentNode->position == end) {
-            return; // Zakoñcz algorytm, jeœli dotarliœmy do punktu koñcowego
+            return;
         }
 
-        // Process neighbors
+        // Przetwarzanie s¹siaduj¹cych wêz³ów
         std::vector<Point> directions = { {0,1}, {1,0}, {0,-1}, {-1,0} };
         for (const auto& dir : directions) {
             int newX = currentNode->position.x + dir.x;
@@ -36,6 +39,7 @@ void BFS(Grid& grid, const Point& start, const Point& end) {
         currentNode->status = Node::Status::CLOSED;
     }
 }
+
 
 
 
