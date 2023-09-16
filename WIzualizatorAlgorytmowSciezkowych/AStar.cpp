@@ -2,12 +2,7 @@
 #include <cmath>
 #include "Grid.h"
 #include "Node.h"
-
-struct CompareNode {
-    bool operator()(Node* a, Node* b) const {
-        return a->getTotalCost() > b->getTotalCost();
-    }
-};
+#include "CompareNode.h"
 
 float heuristic(const Point& a, const Point& b) {
     return std::abs(a.x - b.x) + std::abs(a.y - b.y);

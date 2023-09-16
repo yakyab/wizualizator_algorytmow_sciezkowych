@@ -15,12 +15,22 @@ public:
         START,
         END,
         OBSTACLE
-    } status; // Dodajemy zmienn¹ status tutaj
+    };
 
+    Status status;
+
+    Node();
     Node(int x, int y);
 
     float getTotalCost() const { return cost + heuristic; }
     bool operator==(const Node& other) const { return position == other.position; }
+
+    struct CompareNode {
+        bool operator()(const Node* a, const Node* b) const {
+            return a->cost > b->cost;
+        }
+    };
 };
+
 
 

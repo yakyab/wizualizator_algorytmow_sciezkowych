@@ -1,15 +1,12 @@
 #include <queue>
 #include "Grid.h"
 #include "Node.h"
+#include "CompareNode.h"
 
-struct CompareNode {
-    bool operator()(Node* a, Node* b) const {
-        return a->cost > b->cost;
-    }
-};
 
 void Dijkstra(Grid& grid, const Point& start, const Point& end) {
     std::priority_queue<Node*, std::vector<Node*>, CompareNode> openList;
+
 
     Node& startNode = grid.getNode(start.x, start.y);
     startNode.cost = 0;
